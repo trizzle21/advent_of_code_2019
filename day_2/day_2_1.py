@@ -11,7 +11,6 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-
 ops = {
     1: lambda x, y: x + y,
     2: lambda x, y: x * y
