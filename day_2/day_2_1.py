@@ -32,14 +32,13 @@ def calculate(values):
         input_1, input_2 = values[chunk[1]], values[chunk[2]]
         final_position = chunk[3]
         values[final_position] = ops[chunk[0]](input_1, input_2)
-    logging.debug(values)
     return values[0]
 
 
-def run():
+def run(noun=12, verb=2):
     values = _get_values()
-    values[1] = 12
-    values[2] = 2
+    values[1] = noun
+    values[2] = verb
     return calculate(values)
  
 
