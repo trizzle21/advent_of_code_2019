@@ -14,37 +14,54 @@ How many different passwords within the range given in your puzzle input meet th
 """
 import logging
 
-from day_4_1 import increasing
+from day_4_1 import increasing, pairs
 
 logging.basicConfig(level=logging.DEBUG)
 
 
-def pairs(value):
+def triples(value):
+    # TODO is wrong
     iter_value = str(value)
-    seen_multi_pair = False
-    seen_single_pair = False
     p_0 = 0
     p_1 = 1
     p_2 = 2
     while p_2 < len(iter_value):
-        is_single_pair_left = iter_value[p_0] == iter_value[p_1] != iter_value[p_2] 
-        is_single_pair_right = iter_value[p_0] != iter_value[p_1] == iter_value[p_2] 
-        is_double_pair = iter_value[p_0] == iter_value[p_1] == iter_value[p_2]
-        if is_double_pair:
-            seen_multi_pair = True
-        if is_single_pair_left or is_single_pair_right:
+        is_triple_pair = iter_value[p_0] == iter_value[p_1] == iter_value[p_2]
+        if is_triple_pair:
+            return True
+        p_0 += 1
+        p_1 += 1 
+        p_2 += 1
+    return False
+
+def pairs(value):
+    iter_value = str(value)
+    seen_triple_pair = False
+    seen_single_pair = False
+
+    p_0 = 0
+    p_1 = 1
+    p_2 = 2
+    while p_2 < len(iter_value):
+        is_triple_pair = iter_value[p_0] == iter_value[p_1] == iter_value[p_2]
+        is_single_pair = iter_value[p_0] == iter_value[p_1] or iter_value[p_1] == iter_value[p_2]
+        if is_triple_pair:
+            seen_triple_pair = True
+        if is_single_pair:
             seen_single_pair = True
         p_0 += 1
         p_1 += 1 
         p_2 += 1
-    return not seen_single_pair and seen_multi_pair
+    return seen_pairs
 
 
 def run(start_point=124075, endpoint=580769):
     pointer = start_point
     count = 0
     while pointer < endpoint:
-        if pairs(pointer) and increasing(pointer):
+        triples(pointer) adn
+
+        if increasing(pointer) :
             count += 1
         pointer += 1
     return count
